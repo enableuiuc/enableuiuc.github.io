@@ -15,15 +15,15 @@
     <meta name="description" content="student, innovator, engineer" />
     <meta property="og:title" content="Sameer Iyengar">
     <meta property="og:description" content="student, innovator, engineer">
-    <title>Sameer Iyengar - Contact</title>
+    <title>Sameer Iyengar - Photography Portfolio</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
         rel="stylesheet">
-    <style>    <style>
-        :root {
+    <style>
+        <style> :root {
             /* Light Theme (default) - High contrast */
             --bg-primary: #f5f5f7;
             --text-primary: #121212;
@@ -39,6 +39,39 @@
             --glass-text-dark: #f8f9fa;
             --border-dark: rgba(255, 255, 255, 0.15);
             --accent-color-dark: #60a5fa;
+        }
+
+        .gallery-item {
+            position: relative;
+            /* Needed for absolute positioning of pseudo-elements */
+        }
+
+        .gallery-item::before,
+        .gallery-item::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            /* Adjust based on your SVG border height */
+            background-image: url('path-to-your-top-border.svg');
+            background-size: cover;
+            z-index: 2;
+        }
+
+        .gallery-item::before {
+            top: 0;
+            background-image: url('Asset 4.svg');
+        }
+
+        .gallery-item::after {
+            bottom: 0;
+            background-image: url('path-to-your-bottom-border.svg');
+        }
+
+        .gallery-img {
+            position: relative;
+            z-index: 1;
         }
 
         .dark-theme {
@@ -98,34 +131,86 @@
             transform: scale(1.1);
         }
 
-        /* Contact Section */
-        #contact {
+        /* Portfolio Section */
+        #portfolio {
             padding: 8rem 0 4rem;
             /* Adjusted for fixed header */
         }
 
-        .contact-container {
+        .gallery-img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border-radius: 12px;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        .gallery-item {
             background: var(--glass-light);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             border: 1px solid var(--border-light);
             border-radius: 12px;
-            padding: 2rem;
-            max-width: 600px;
-            margin: 0 auto;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .email-link {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 600;
+            overflow: hidden;
             transition: all 0.3s ease;
         }
 
-        .email-link:hover {
-            text-decoration: underline;
-            transform: translateY(-2px);
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-theme .gallery-item:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+            margin-top: 10vh;
+            background: var(--glass-light);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border-light);
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            text-align: center;
+            color: var(--text-primary);
+            padding: 10px 0;
+            font-size: 1.2rem;
         }
 
         /* Dropdown menu */
@@ -154,14 +239,16 @@
             color: var(--glass-text);
         }
 
-        @media (max-width: 768px) {
-            #contact {
-                padding: 6rem 0 2rem;
-            }
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
 
-            .contact-container {
-                margin: 0 1rem;
-                padding: 1.5rem;
+        @media (max-width: 768px) {
+            #portfolio {
+                padding: 6rem 0 2rem;
             }
 
             #nav-menu {
@@ -172,6 +259,12 @@
                 border-radius: 8px;
                 padding: 1rem;
                 margin-top: 0.5rem;
+            }
+
+            .modal-content {
+                max-width: 95%;
+                max-height: 85vh;
+                margin-top: 5vh;
             }
         }
     </style>
@@ -203,7 +296,7 @@
                         </button>
                     </li>
                     <!-- Desktop Fun Things Dropdown -->
-                    <li class="relative desktop-dropdown">
+                    <li class="relative group">
                         <button class="flex items-center">
                             fun things
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -212,7 +305,7 @@
                                     d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="absolute left-0 hidden pt-2 desktop-dropdown-menu">
+                        <div class="absolute left-0 hidden pt-2 group-hover:block desktop-dropdown-menu">
                             <a href="/cat-gallery.html" class="block px-4 py-2 hover:text-accent-color">eva!!</a>
                         </div>
                     </li>
@@ -224,21 +317,63 @@
     </header>
 
     <main>
-        <section id="contact" class="contact">
-            <div class="contact-container">
-                <h2 class="mb-6 text-3xl font-bold text-center">contact me</h2>
-                <p class="mb-6 text-lg">If you'd like to get in touch with me, feel free to reach out via email:</p>
-                <div class="space-y-4">
-                    <p>
-                        sameer.m.iyengar (at) gmail.com
-                    </p>
-                    <p>
-                        sameeri2 (at) illinois.edu
-                    </p>
+        <section id="portfolio" class="portfolio">
+            <div class="container px-4 mx-auto">
+                <h2 class="mb-8 text-3xl font-bold text-center">photography portfolio</h2>
+                <h3 class="mb-8 text-xl font-bold text-center">click to loupe!</h3>
+                <div class="grid">
+                    <!-- Gallery Item 1 -->
+                    <div class="gallery-item">
+                        <img loading="lazy" src="./images/photo1.jpg" alt="Photo 1" class="gallery-img"
+                            onclick="openModal('./images/photo1.jpg', 'rowhouses, San Francisco, CA')">
+                    </div>
+
+                    <!-- Gallery Item 2 -->
+                    <div class="gallery-item">
+                        <img loading="lazy" src="./images/photo2.jpg" alt="Photo 2" class="gallery-img"
+                            onclick="openModal('./images/photo2.jpg', 'utility box, Point Reyes, CA')">
+                    </div>
+
+                    <!-- Gallery Item 3 -->
+                    <div class="gallery-item">
+                        <img loading="lazy" src="./images/photo3.png" alt="Photo 3" class="gallery-img"
+                            onclick="openModal('./images/photo3.png', 'sea rocks, Point Reyes, CA')">
+                    </div>
+
+                    <!-- Gallery Item 4 -->
+                    <div class="gallery-item">
+                        <img loading="lazy" src="./images/photo4.png" alt="Photo 4" class="gallery-img"
+                            onclick="openModal('./images/photo4.png', 'red-winged blackbird, U of I Arboretum, Urbana, IL')">
+                    </div>
+
+                    <!-- Gallery Item 5 -->
+                    <div class="gallery-item">
+                        <img loading="lazy" src="./images/photo5.png" alt="Photo 5" class="gallery-img"
+                            onclick="openModal('./images/photo5.png', 'architecture, Opera House, Sydney, Australia')">
+                    </div>
+
+                    <!-- Gallery Item 6 -->
+                    <div class="gallery-item">
+                        <img loading="lazy" src="./images/photo6.png" alt="Photo 6" class="gallery-img"
+                            onclick="openModal('./images/photo6.png', 'hanging garden, The Castro, San Francisco, CA')">
+                    </div>
+
+                    <!-- Gallery Item 7 -->
+                    <div class="gallery-item">
+                        <img loading="lazy" src="./images/photo7.png" alt="Photo 7" class="gallery-img"
+                            onclick="openModal('./images/photo7.png', 'MUNI bus, The Castro, San Francisco, CA')">
+                    </div>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- The Modal/Lightbox -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img loading="lazy" class="modal-content" id="img01">
+        <div id="caption" class="caption"></div>
+    </div>
 
     <footer class="text-center">
         <div class="container mx-auto">
@@ -283,6 +418,36 @@
 
         // Initialize icons
         updateIcons();
+
+        // Lightbox functionality
+        function openModal(src, alt) {
+            const modal = document.getElementById("myModal");
+            const modalImg = document.getElementById("img01");
+            const captionText = document.getElementById("caption");
+
+            modal.style.display = "block";
+            modalImg.src = src;
+            captionText.innerHTML = alt;
+
+            // Close modal when clicking outside the image
+            modal.onclick = function (event) {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            };
+
+            // Close modal with Escape key
+            document.onkeydown = function (evt) {
+                evt = evt || window.event;
+                if (evt.key === "Escape") {
+                    closeModal();
+                }
+            };
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
     </script>
 </body>
 

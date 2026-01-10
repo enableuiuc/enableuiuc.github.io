@@ -3,10 +3,10 @@
 
 <head>
     <script>
-    if (localStorage.theme === 'dark' || 
-        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark-theme');
-    }
+        if (localStorage.theme === 'dark' ||
+            (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark-theme');
+        }
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,11 @@
     <meta property="og:description" content="student, innovator, engineer">
     <title>Sameer Iyengar - About</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             /* Light Theme (default) - High contrast */
@@ -27,7 +31,7 @@
             --glass-text: #121212;
             --border-light: rgba(0, 0, 0, 0.1);
             --accent-color: #3b82f6;
-            
+
             /* Dark Theme */
             --bg-primary-dark: #0a0a0a;
             --text-primary-dark: #f8f9fa;
@@ -47,7 +51,7 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'DM Mono', sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             transition: background 0.5s ease, color 0.3s ease;
@@ -96,7 +100,8 @@
 
         /* About section */
         #about {
-            padding: 8rem 0 4rem; /* Adjusted for fixed header */
+            padding: 8rem 0 4rem;
+            /* Adjusted for fixed header */
             min-height: calc(100vh - 120px);
             display: flex;
             flex-direction: column;
@@ -125,7 +130,7 @@
         }
 
         /* Dropdown menu */
-        .desktop-dropdown-menu { 
+        .desktop-dropdown-menu {
             margin-top: 0.5rem;
             background: var(--glass-light);
             backdrop-filter: blur(12px);
@@ -153,13 +158,13 @@
             #about {
                 padding: 6rem 0 2rem;
             }
-            
+
             .profile-image {
                 width: 150px;
                 height: 150px;
                 margin-bottom: 2rem;
             }
-            
+
             #nav-menu {
                 background: var(--glass-light);
                 backdrop-filter: blur(12px);
@@ -179,8 +184,10 @@
             <h1 class="text-2xl font-semibold">Sameer Iyengar</h1>
             <div class="md:hidden">
                 <button id="nav-toggle" class="focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7" />
                     </svg>
                 </button>
             </div>
@@ -200,8 +207,10 @@
                     <li class="relative desktop-dropdown">
                         <button class="flex items-center">
                             fun things
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
                         <div class="absolute left-0 hidden pt-2 desktop-dropdown-menu">
@@ -224,10 +233,19 @@
                 <div class="about-content">
                     <h2 class="mb-6 text-4xl font-boldtext-center md:text-center">about</h2>
                     <div class="space-y-4 text-lg">
-                        <p>I'm a student, entrepreneur, and engineer excited to solve global issues through innovation and collaboration who promotes creativity, collectivism, and innovation through initiative.</p>
-                        <p>I have extensive experience with technology, including hardware engineering, electrical engineering, web development, and machine learning. I've led numerous projects and initiatives, some of which to international acclaim.</p>
-                        <p>In the future, I hope to continue my efforts to solve issues on a global scale with like-minded individuals! Currently, I'm helping out with research at UIUC's AUVSL (Autonomous and Unmanned Vehicle Systems Laboratory). My work there included electromechanical design as well as vehicle dynamics simulation.</p>
-                        <p>I'm also experienced with both ROS1 and ROS2. In my free time, I enjoy robotics as a hobby, as well as film photography. I often take my own photos, developing and scanning them myself.</p>
+                        <p>I'm a student, entrepreneur, and engineer excited to solve global issues through innovation
+                            and collaboration who promotes creativity, collectivism, and innovation through initiative.
+                        </p>
+                        <p>I have extensive experience with technology, including hardware engineering, electrical
+                            engineering, web development, and machine learning. I've led numerous projects and
+                            initiatives, some of which to international acclaim.</p>
+                        <p>In the future, I hope to continue my efforts to solve issues on a global scale with
+                            like-minded individuals! Currently, I'm helping out with research at UIUC's AUVSL
+                            (Autonomous and Unmanned Vehicle Systems Laboratory). My research topics include
+                            electromechanical design as well as vehicle dynamics simulation.</p>
+                        <p>I'm also experienced with both ROS1 and ROS2. In my free time, I enjoy robotics as a hobby,
+                            as well as film photography. I often take my own photos, developing and scanning them
+                            myself.</p>
                     </div>
                 </div>
             </div>
@@ -255,8 +273,8 @@
         const lightIcon = document.querySelector('.light-icon');
 
         // Check for saved preference or system preference
-        const savedTheme = localStorage.getItem('theme') || 
-                         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        const savedTheme = localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
         if (savedTheme === 'dark') document.documentElement.classList.add('dark-theme');
 
@@ -279,4 +297,5 @@
         updateIcons();
     </script>
 </body>
+
 </html>
