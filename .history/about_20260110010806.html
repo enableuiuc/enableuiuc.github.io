@@ -15,7 +15,7 @@
     <meta name="description" content="student, innovator, engineer" />
     <meta property="og:title" content="Sameer Iyengar">
     <meta property="og:description" content="student, innovator, engineer">
-    <title>Sameer Iyengar - Contact</title>
+    <title>Sameer Iyengar - About</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -98,34 +98,35 @@
             transform: scale(1.1);
         }
 
-        /* Contact Section */
-        #contact {
+        /* About section */
+        #about {
             padding: 8rem 0 4rem;
             /* Adjusted for fixed header */
+            min-height: calc(100vh - 120px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .contact-container {
-            background: var(--glass-light);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            padding: 2rem;
-            max-width: 600px;
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            justify-self: center
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
+
+        .about-content {
+            max-width: 800px;
             margin: 0 auto;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .email-link {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .email-link:hover {
-            text-decoration: underline;
-            transform: translateY(-2px);
+            padding: 0 2rem;
         }
 
         /* Dropdown menu */
@@ -151,17 +152,17 @@
             -webkit-backdrop-filter: blur(12px);
             border-top: 1px solid var(--border-light);
             padding: 1rem 0;
-            color: var(--glass-text);
         }
 
         @media (max-width: 768px) {
-            #contact {
+            #about {
                 padding: 6rem 0 2rem;
             }
 
-            .contact-container {
-                margin: 0 1rem;
-                padding: 1.5rem;
+            .profile-image {
+                width: 150px;
+                height: 150px;
+                margin-bottom: 2rem;
             }
 
             #nav-menu {
@@ -194,7 +195,7 @@
                 <ul class="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-6">
                     <li><a href="/index.html">home</a></li>
                     <li><a href="/portfolio.html">portfolio</a></li>
-                    <li><a href="/resume.html">resume</a></li>
+                    <li><a href="resume.html">resume</a></li>
                     <li><a href="https://www.linkedin.com/in/sameer-iyengar/">LinkedIn</a></li>
                     <li>
                         <button id="theme-toggle" class="p-2 ml-4 rounded-full">
@@ -224,17 +225,35 @@
     </header>
 
     <main>
-        <section id="contact" class="contact">
-            <div class="contact-container">
-                <h2 class="mb-6 text-3xl font-bold text-center">contact me</h2>
-                <p class="mb-6 text-lg">If you'd like to get in touch with me, feel free to reach out via email:</p>
-                <div class="space-y-4">
-                    <p>
-                        sameer.m.iyengar (at) gmail.com
-                    </p>
-                    <p>
-                        sameeri2 (at) illinois.edu
-                    </p>
+        <section id="about" class="about">
+            <div class="container flex flex-col items-center px-4 mx-auto md:flex-row">
+                <div class="flex justify-center w-full mb-8 md:w-auto md:mb-0 md:mr-12">
+                    <img src="/images/profile.jpg" alt="Profile Picture" class="profile-image">
+                </div>
+                <div class="about-content">
+                    <h2 class="mb-6 text-4xl font-boldtext-center md:text-center">about</h2>
+                    <div class="space-y-4 text-lg">
+<<<<<<< HEAD
+                        <p>I'm a student, entrepreneur, and engineer excited to solve global issues through innovation and collaboration who promotes creativity, collectivism, and innovation through initiative.</p>
+                        <p>I have extensive experience with technology, including hardware engineering, electrical engineering, web development, and machine learning. I've led numerous projects and initiatives, some of which to international acclaim.</p>
+                        <p>In the future, I hope to continue my efforts to solve issues on a global scale with like-minded individuals! Currently, I'm helping out with research at UIUC's AUVSL (Autonomous and Unmanned Vehicle Systems Laboratory). My work there included electromechanical design as well as vehicle dynamics simulation.</p>
+                        <p>I'm also experienced with both ROS1 and ROS2. In my free time, I enjoy robotics as a hobby, as well as film photography. I often take my own photos, developing and scanning them myself.</p>
+=======
+                        <p>I'm a student, entrepreneur, and engineer excited to solve global issues through innovation
+                            and collaboration who promotes creativity, collectivism, and innovation through initiative.
+                        </p>
+                        <p>I have extensive experience with technology, including hardware engineering, electrical
+                            engineering, web development, and machine learning. I've led numerous projects and
+                            initiatives, some of which to international acclaim.</p>
+                        <p>In the future, I hope to continue my efforts to solve issues on a global scale with
+                            like-minded individuals! Currently, I'm helping out with research at UIUC's AUVSL
+                            (Autonomous and Unmanned Vehicle Systems Laboratory). My research topics include
+                            electromechanical design as well as vehicle dynamics simulation.</p>
+                        <p>I'm also experienced with both ROS1 and ROS2. In my free time, I enjoy robotics as a hobby,
+                            as well as film photography. I often take my own photos, developing and scanning them
+                            myself.</p>
+>>>>>>> ec0699bda26dda8544a6195ac6408269d210e321
+                    </div>
                 </div>
             </div>
         </section>
