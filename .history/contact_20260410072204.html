@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        if (localStorage.theme === 'dark' ||
+            (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark-theme');
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:image" content="images/profile.jpg">
+    <meta property="og:image:type" content="image/jpg">
+
+    <title>e-NABLE UIUC</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+        rel="stylesheet">
+    <style>
+        .sidenav {
+            height: 100%;
+            width: 20%;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: var(--accent-color);
+            overflow-x: hidden;
+            padding-top: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .main {
+            margin-left: 160px;
+            padding: 0px 10px;
+        }
+
+        @media screen and (max-width: 500px) {
+            .sidenav {display: none;}
+            .sidenav a {font-size: 18px;}
+            #home {width: 100%; border: 10;}
+        }
+
+        .group:hover .group-hover\:block {
+            display: block;
+        }
+
+        :root {
+            --bg-primary: #FF5F05;
+            --text-primary: #121212;
+            --glass-light: rgba(255, 255, 255, 0.85);
+            --glass-text: #121212;
+            --border-light: rgba(0, 0, 0, 0.1);
+            --accent-color: #13294B;
+
+            --bg-primary-dark: #13294B;
+            --text-primary-dark: #f8f9fa;
+            --glass-dark: #13294B;
+            --glass-text-dark: #f8f9fa;
+            --border-dark: rgba(255, 255, 255, 0.15);
+            --accent-color-dark: #FF5F05;
+        }
+
+        .dark-theme {
+            --bg-primary: var(--bg-primary-dark);
+            --text-primary: var(--text-primary-dark);
+            --glass-light: var(--glass-dark);
+            --glass-text: var(--glass-text-dark);
+            --border-light: var(--border-dark);
+            --accent-color: var(--accent-color-dark);
+        }
+
+        body {
+            font-family: 'DM Mono', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background 0.5s ease, color 0.3s ease;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.05"/></svg>');
+            line-height: 1.6;
+        }
+
+        header,
+        .gallery-item,
+        footer {
+            background: var(--glass-light) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-color: var(--border-light) !important;
+            color: var(--glass-text) !important;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        nav a {
+            color: var(--glass-text);
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        #theme-toggle {
+            background: var(--glass-light);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.5);
+        }
+
+        #home {
+            background-image: url('images/hero.png');
+            background-size: cover;
+            background-position: center;
+            margin-top: 80px;
+        }
+
+        #home h2,
+        #home p {
+            color: var(--text-primary);
+        }
+
+        #side-panel {
+            position: fixed;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 400px;
+            background: var(--bg-primary);
+            border-left: 1px solid var(--border-light);
+            overflow-y: auto;
+            display: none;
+            padding-top: 5rem;
+        }
+
+        #home .glass {
+            background: var(--glass-light) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--border-light);
+        }
+
+        .gallery-img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-theme .gallery-img:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin-top: 5vh;
+            background: var(--glass-light);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .caption {
+            color: var(--text-primary);
+        }
+
+        @keyframes move {
+            0% {
+                transform: scale(1) translate(10px, -30px);
+            }
+
+            38% {
+                transform: scale(0.8, 1) translate(80vw, 30vh) rotate(160deg);
+            }
+
+            40% {
+                transform: scale(0.8, 1) translate(80vw, 30vh) rotate(160deg);
+            }
+
+            78% {
+                transform: scale(1.3) translate(0vw, 50vh) rotate(-20deg);
+            }
+
+            80% {
+                transform: scale(1.3) translate(0vw, 50vh) rotate(-20deg);
+            }
+
+            100% {
+                transform: scale(1) translate(10px, -30px);
+            }
+        }
+
+        .desktop-dropdown-menu {
+            margin-top: 0.5rem;
+            pointer-events: auto;
+            background: var(--glass-light);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .desktop-dropdown:hover .desktop-dropdown-menu {
+            display: block;
+        }
+
+        #nav-menu.hidden {
+            display: none;
+        }
+
+        #nav-menu {
+            display: flex;
+        }
+    </style>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+
+<body>
+    <header class="fixed top-0 z-10 w-full py-4 ">
+        <div class="container flex items-center justify-between px-4 mx-auto ">
+            <h1 class="text-2xl font-semibold">e-NABLE @ UIUC</h1>
+            <div class="md:hidden">
+                <button id="nav-toggle" class="focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+            <nav id="nav-menu" class="hidden md:flex md:space-x-6">
+                <ul class="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-6">
+                    <li><a href="/index.html">home</a></li>
+
+
+                    <li>
+                        <button id="theme-toggle" class="p-2 ml-4 rounded-full">
+                            <span class="light-icon">🌞</span>
+                            <span class="hidden dark-icon">🌙</span>
+                        </button>
+                    </li>
+
+                    <li><a href="/contact.html">contact</a></li>
+                    <li><a href="/about.html">about</a></li>
+                </ul>
+            </nav>
+
+        </div>
+
+    </header>
+
+    <main>
+        <section id="contact" class="contact">
+            <div class="contact-container">
+                <h2 class="mb-6 text-3xl font-bold text-center">contact us</h2>
+                <p class="mb-6 text-lg">If you'd like to get in touch with us, feel free to reach out via email:</p>
+                <div class="space-y-4">
+                    <p>
+                        enableuiuc-group (at) office365.illinois.edu
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-4 text-center">
+        <div class="container mx-auto">
+            <p>&copy; e-NABLE @ UIUC 2026</p>
+        </div>
+    </footer>
+
+
+    <script>
+        // Mobile navigation toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('hidden');
+        });
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const darkIcon = document.querySelector('.dark-icon');
+        const lightIcon = document.querySelector('.light-icon');
+
+        // Check for saved preference or system preference
+        const savedTheme = localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        if (savedTheme === 'dark') document.documentElement.classList.add('dark-theme');
+
+        // Update UI icons
+        function updateIcons() {
+            const isDark = document.documentElement.classList.contains('dark-theme');
+            darkIcon.classList.toggle('hidden', !isDark);
+            lightIcon.classList.toggle('hidden', isDark);
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark-theme');
+            const theme = document.documentElement.classList.contains('dark-theme') ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+            updateIcons();
+        });
+
+        // Initialize icons
+        updateIcons();
+    </script>
+</body>
+
+</html>
