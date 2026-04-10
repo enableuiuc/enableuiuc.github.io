@@ -527,15 +527,13 @@
 
     <footer class="py-4 text-center">
         <div class="container mx-auto">
-            <p class="text-sm">
-                this website was made by humans in Champaign-Urbana, IL :]
-            </p>
             <p>&copy; e-NABLE @ UIUC 2026</p>
         </div>
     </footer>
 
 
     <script>
+        // Mobile navigation toggle
         const navToggle = document.getElementById('nav-toggle');
         const navMenu = document.getElementById('nav-menu');
 
@@ -543,21 +541,25 @@
             navMenu.classList.toggle('hidden');
         });
 
+        // Theme toggle functionality
         const themeToggle = document.getElementById('theme-toggle');
         const darkIcon = document.querySelector('.dark-icon');
         const lightIcon = document.querySelector('.light-icon');
 
+        // Check for saved preference or system preference
         const savedTheme = localStorage.getItem('theme') ||
             (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
         if (savedTheme === 'dark') document.documentElement.classList.add('dark-theme');
 
+        // Update UI icons
         function updateIcons() {
             const isDark = document.documentElement.classList.contains('dark-theme');
             darkIcon.classList.toggle('hidden', !isDark);
             lightIcon.classList.toggle('hidden', isDark);
         }
 
+        // Toggle theme
         themeToggle.addEventListener('click', () => {
             document.documentElement.classList.toggle('dark-theme');
             const theme = document.documentElement.classList.contains('dark-theme') ? 'dark' : 'light';
@@ -565,6 +567,7 @@
             updateIcons();
         });
 
+        // Initialize icons
         updateIcons();
     </script>
 </body>
