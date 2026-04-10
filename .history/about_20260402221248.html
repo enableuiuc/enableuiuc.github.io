@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        if (localStorage.theme === 'dark' ||
+            (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark-theme');
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:image" content="./images/profile.jpg">
+    <meta property="og:image:type" content="image/jpg">
+    <meta name="description" content="UIUC's very own e-NABLE chapter!" />
+    <meta property="og:title" content="e-NABLE @ UIUC">
+    <meta property="og:description" content="UIUC's very own e-NABLE chapter!">
+    <title>e-NABLE @ UIUC</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            /* Light Theme (default) - High contrast */
+            --bg-primary: #f5f5f7;
+            --text-primary: #121212;
+            --glass-light: rgba(255, 255, 255, 0.85);
+            --glass-text: #121212;
+            --border-light: rgba(0, 0, 0, 0.1);
+            --accent-color: #3b82f6;
+
+            /* Dark Theme */
+            --bg-primary-dark: #0a0a0a;
+            --text-primary-dark: #f8f9fa;
+            --glass-dark: rgba(20, 20, 20, 0.85);
+            --glass-text-dark: #f8f9fa;
+            --border-dark: rgba(255, 255, 255, 0.15);
+            --accent-color-dark: #60a5fa;
+        }
+
+        .dark-theme {
+            --bg-primary: var(--bg-primary-dark);
+            --text-primary: var(--text-primary-dark);
+            --glass-light: var(--glass-dark);
+            --glass-text: var(--glass-text-dark);
+            --border-light: var(--border-dark);
+            --accent-color: var(--accent-color-dark);
+        }
+
+        body {
+            font-family: 'DM Mono', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background 0.5s ease, color 0.3s ease;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.05"/></svg>');
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Glassmorphism Navigation Bar */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--glass-light) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-light);
+            color: var(--glass-text) !important;
+            z-index: 100;
+            padding: 1rem 0;
+        }
+
+        /* Navigation */
+        nav a {
+            color: var(--glass-text);
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Theme toggle button */
+        #theme-toggle {
+            background: var(--glass-light);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* About section */
+        #about {
+            padding: 8rem 0 4rem;
+            /* Adjusted for fixed header */
+            min-height: calc(100vh - 120px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            justify-self: center
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Dropdown menu */
+        .desktop-dropdown-menu {
+            margin-top: 0.5rem;
+            background: var(--glass-light);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .desktop-dropdown:hover .desktop-dropdown-menu {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--glass-light);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border-light);
+            padding: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            #about {
+                padding: 6rem 0 2rem;
+            }
+
+            .profile-image {
+                width: 150px;
+                height: 150px;
+                margin-bottom: 2rem;
+            }
+
+            #nav-menu {
+                background: var(--glass-light);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid var(--border-light);
+                border-radius: 8px;
+                padding: 1rem;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="fixed top-0 z-10 w-full">
+        <div class="container flex items-center justify-between px-4 mx-auto">
+            <img src="/images/logotransp.png" alt="e-NABLE UIUC Logo" class="w-10 h-10 mr-2">
+            <h1 class="text-2xl font-semibold">e-NABLE UIUC</h1>
+            <div class="md:hidden">
+                <button id="nav-toggle" class="focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+            <nav id="nav-menu" class="hidden md:flex md:space-x-6">
+                <ul class="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-6">
+                    <li><a href="/index.html">home</a></li>
+
+                    <li><a href="/contact.html">contact</a></li>
+                    <li><a href="/about.html">about</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="about">
+            <div class="container flex flex-col items-center px-4 mx-auto md:flex-row">
+                <div class="flex justify-center w-full mb-8 md:w-auto md:mb-0 md:mr-12">
+                    <img src="/images/logoi.jpg" alt="Profile Picture" class="profile-image">
+                </div>
+                <div class="about-content">
+                    <h2 class="mb-6 text-4xl font-boldtext-center md:text-center">about us</h2>
+                    <div class="space-y-4 text-lg">
+                        We are a chapter of <a class="text-blue-500 hover:underline" href="https://enablingthefuture.org/" target="_blank" rel="noopener noreferrer">e-NABLE</a> at the University of Illinois
+                            Urbana-Champaign. e-NABLE is a global network of volunteers who use 3D printing and other
+                            technologies to create prosthetic hands and arms for those in need. Our mission is to
+                            empower individuals with limb differences by providing them with affordable, customizable,
+                            and functional prosthetic devices. We are passionate about using technology for social good
+                            and making a positive impact in our community and beyond.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-4 text-center">
+        <div class="container mx-auto">
+            <p>&copy; e-NABLE @ UIUC 2026</p>
+        </div>
+    </footer>
+
+
+    <script>
+        // Mobile navigation toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('hidden');
+        });
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const darkIcon = document.querySelector('.dark-icon');
+        const lightIcon = document.querySelector('.light-icon');
+
+        // Check for saved preference or system preference
+        const savedTheme = localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        if (savedTheme === 'dark') document.documentElement.classList.add('dark-theme');
+
+        // Update UI icons
+        function updateIcons() {
+            const isDark = document.documentElement.classList.contains('dark-theme');
+            darkIcon.classList.toggle('hidden', !isDark);
+            lightIcon.classList.toggle('hidden', isDark);
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark-theme');
+            const theme = document.documentElement.classList.contains('dark-theme') ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+            updateIcons();
+        });
+
+        // Initialize icons
+        updateIcons();
+    </script>
+</body>
+
+</html>
