@@ -243,12 +243,9 @@
         #nav-menu.hidden {
             display: none;
         }
-        #nav-menu.shown {
-            display: flex;
-        }
 
         #nav-menu {
-            display: hidden;
+            display: flex;
         }
         :root {
             /* Light Theme (default) - High contrast */
@@ -423,7 +420,7 @@
                     </svg>
                 </button>
             </div>
-            <nav id="nav-menu" class="md:flex md:space-x-6 max-sm:hidden">
+            <nav id="nav-menu" class="md:flex md:space-x-6">
                 <ul class="flex flex-col items-center space-y-4 md:flex-row md:space-y-0 md:space-x-6">
                     <li><a href="/index.html">home</a></li>
                     <li><a href="/contact.html">contact</a></li>
@@ -462,7 +459,7 @@
     <ul role="list" class="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
       <li>
         <div class="flex items-center gap-x-6">
-          <img src="images/team/noah.png" alt="" class="object-cover rounded-full size-40 outline-1 -outline-offset-1 outline-orange-400" />
+          <img src="images/team/noah.png" alt="" class="object-cover rounded-full size-40 outline-1 -outline-offset-1 outline-white/10" />
           <div>
             <h3 class="font-semibold tracking-tight text-white text-base/7">Noah Guzman</h3>
             <p class="font-semibold text-orange-400 text-sm/6">president</p>
@@ -475,7 +472,7 @@
       </li>
       <li>
         <div class="flex items-center gap-x-6">
-          <img src="images/team/ravi.jpeg" alt="" class="object-cover rounded-full size-40 outline-1 -outline-offset-1 outline-orange-400" />
+          <img src="images/team/ravi.jpeg" alt="" class="object-cover rounded-full size-40 outline-1 -outline-offset-1 outline-white/10" />
           <div>
             <h3 class="font-semibold tracking-tight text-white text-base/7">Ravi Shah</h3>
             <p class="font-semibold text-orange-400 text-sm/6">vice president</p>
@@ -486,7 +483,7 @@
       </li>
       <li>
         <div class="flex items-center gap-x-6">
-          <img src="images/team/yuliia.jpeg" alt="" class="object-cover rounded-full aspect-square size-40 outline-1 -outline-offset-1 outline-orange-400" />
+          <img src="images/team/yuliia.jpeg" alt="" class="object-cover rounded-full aspect-square size-40 outline-1 -outline-offset-1 outline-white/10" />
           <div>
             <h3 class="font-semibold tracking-tight text-white text-base/7">Yuliia Kohut</h3>
             <p class="font-semibold text-orange-400 text-sm/6">treasurer</p>
@@ -499,7 +496,7 @@
       </li>
       <li>
         <div class="flex items-center gap-x-6">
-          <img src="images/team/sameer.png" alt="" class="object-cover rounded-full size-40 outline-1 -outline-offset-1 outline-orange-400" />
+          <img src="images/team/sameer.png" alt="" class="object-cover rounded-full size-40 outline-1 -outline-offset-1 outline-white/10" />
           <div>
             <h3 class="font-semibold tracking-tight text-white text-base/7">Sameer Iyengar</h3>
             <p class="font-semibold text-orange-400 text-sm/6">research & development director</p>
@@ -510,7 +507,7 @@
       </li>
       <li>
         <div class="flex items-center gap-x-6">
-          <img src="images/team/cindy.png" alt="" class="object-cover rounded-full size-40 aspect-square outline-1 -outline-offset-1 outline-orange-400" />
+          <img src="images/team/cindy.png" alt="" class="object-cover rounded-full size-40 outline-1 -outline-offset-1 outline-white/10" />
           <div>
             <h3 class="font-semibold tracking-tight text-white text-base/7">Cindy Chen</h3>
             <p class="font-semibold text-orange-400 text-sm/6">outreach director</p>
@@ -543,7 +540,7 @@
         const navMenu = document.getElementById('nav-menu');
 
         navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('shown');
+            navMenu.classList.toggle('hidden');
         });
 
         const themeToggle = document.getElementById('theme-toggle');
