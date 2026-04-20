@@ -257,17 +257,6 @@
             transition: all 0.3s ease;
         }
 
-        .grid-card-img {
-            background: var(--glass-light);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            padding: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-
         @media (max-width: 768px) {
             .grid-card {
                 background: var(--glass-light);
@@ -328,25 +317,17 @@
                 <h2 class="mb-6 text-3xl font-bold text-center max-sm:text-2xl">projects</h2>
                 <h3 class="mb-6 text-2xl text-center max-sm:text-lg">check out our latest projects!</h3>
                 <p class="max-sm:hidden ">hover <dfn title="hello!">italic words</dfn> to demystify jargon! </p>
-                </br>
+                </br class="max-sm:hidden">
                 <section class="p-6 glass-panel">
                     <h2 class="mb-4 text-xl font-bold max:sm:text-base">EOH 2026 Demo</h2>
                     <div class="grid grid-cols-2 gap-4 max-sm:grid-cols-1">
                         <div class="grid-card">
                             <p class="max-sm:text-xs">For our EOH 2026 project, we worked on a proof of
                                 concept
-                                for a low-cost EMG-controlled prosthetic. Using DFRobot Gravity EMG sensors, we wrote a
-                                program to step the servos at a constant rate when the operator's bicep is flexed
-                                (closing the hand), and to step the servos in the opposite direction when the operator
-                                relaxes (opening the hand). Based off of a time delay, we had the fully closed hand
-                                either form a fist, or a peace sign to demonstrate the extensibility of the exisiting
-                                design.
-
-                                Though similar projects have been done in
+                                for a low-cost EMG-controlled prosthetic. Though similar projects have been done in
                                 the
                                 past, we hoped to acquaint our members with basic prosthetic technology including:
                             </p>
-                            </br>
                             <ul class="list-disc list-inside text-2sm max-sm:text-xs">
                                 <li> 3D design and printing </li>
                                 <li> laser cutting </li>
