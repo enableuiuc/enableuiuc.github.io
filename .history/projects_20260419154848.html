@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        if (localStorage.theme === 'dark' ||
+            (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark-theme');
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:image" content="./images/profile.jpg">
+    <meta property="og:image:type" content="image/jpg">
+
+    <title>e-NABLE @ UIUC - Projects</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Tooltip container */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+            /* If you want dots under the hoverable text */
+        }
+
+        /* Tooltip text */
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 6px;
+
+            /* Position the tooltip text */
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+
+            /* Fade in tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        /* Tooltip arrow */
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        /* Show the tooltip text when you mouse over the tooltip container */
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        footer {
+            background: var(--glass-light) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-color: var(--border-light) !important;
+            color: var(--glass-text) !important;
+        }
+
+        :root {
+            /* Light Theme (default) - High contrast */
+            --bg-primary: #FF5F05;
+            --text-primary: #121212;
+            --glass-light: rgba(255, 255, 255, 0.85);
+            --glass-text: #121212;
+            --border-light: rgba(0, 0, 0, 0.1);
+            --accent-color: #3b82f6;
+
+            /* Dark Theme */
+            --bg-primary-dark: #13294B;
+            --text-primary-dark: #f8f9fa;
+            --glass-dark: #13294B;
+            --glass-text-dark: #f8f9fa;
+            --border-dark: rgba(255, 255, 255, 0.15);
+            --accent-color-dark: #60a5fa;
+        }
+
+        .dark-theme {
+            --bg-primary: var(--bg-primary-dark);
+            --text-primary: var(--text-primary-dark);
+            --glass-light: var(--glass-dark);
+            --glass-text: var(--glass-text-dark);
+            --border-light: var(--border-dark);
+            --accent-color: var(--accent-color-dark);
+        }
+
+        body {
+            flex-shrink: 0;
+            margin-bottom: 50px;
+            /* To prevent content from being hidden behind the fixed footer */
+            min-height: 100vh;
+            font-family: 'DM Mono', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background 0.5s ease, color 0.3s ease;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.05"/></svg>');
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Glassmorphism Navigation Bar */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--glass-light) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-light);
+            color: var(--glass-text) !important;
+            z-index: 100;
+            padding: 1rem 0;
+        }
+
+        /* Navigation */
+        nav a {
+            color: var(--glass-text);
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Theme toggle button */
+        #theme-toggle {
+            background: var(--glass-light);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: 8rem 0 4rem;
+            /* Adjusted for fixed header */
+        }
+
+        .glass-panel {
+            background: var(--glass-light);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            color: var(--glass-text);
+            transition: all 0.3s ease;
+        }
+
+        .contact-container {
+            background: var(--glass-light);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .email-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .email-link:hover {
+            text-decoration: underline;
+            transform: translateY(-2px);
+        }
+
+        /* Dropdown menu */
+        .desktop-dropdown-menu {
+            margin-top: 0.5rem;
+            background: var(--glass-light);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .desktop-dropdown:hover .desktop-dropdown-menu {
+            display: block;
+        }
+
+
+
+        @media (max-width: 768px) {
+            #contact {
+                padding: 6rem 0 2rem;
+            }
+
+            .contact-container {
+                margin: 0 1rem;
+                padding: 1.5rem;
+            }
+
+            #nav-menu.hidden {
+                display: none;
+            }
+
+            #nav-menu.shown {
+                display: flex;
+            }
+
+            #nav-menu {
+                display: none;
+            }
+
+            #nav-menu {
+                background: var(--glass-light);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid var(--border-light);
+                border-radius: 8px;
+                padding: 1rem;
+                margin-top: 0.5rem;
+            }
+        }
+
+        .grid-card {
+            background: var(--glass-light);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="fixed top-0 z-50 w-full py-4">
+        <div class="container flex items-center justify-between px-4 mx-auto">
+            <h1 class="text-2xl font-semibold">e-NABLE @ UIUC</h1>
+            <div class="md:hidden">
+                <button id="nav-toggle" class="focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+            <nav id="nav-menu" class="md:flex md:space-x-6">
+                <ul class="flex flex-col items-center space-y-4 md:flex-row md:space-y-0 md:space-x-6">
+                    <li><a href="/index.html">home</a></li>
+                    <li><a href="/projects.html">projects</a></li>
+
+                    <li><a href="/contact.html">contact</a></li>
+                    <li><a href="/about.html">about</a></li>
+                    <li>
+                        <button id="theme-toggle" class="p-2 rounded-full">
+                            <span class="light-icon">🌞</span>
+                            <span class="hidden dark-icon">🌙</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="projects" class="contact">
+            <div class="border-orange-600 contact-container">
+                <h2 class="mb-6 text-3xl font-bold text-center">projects</h2>
+                <h3 class="mb-6 text-2xl">check out our latest projects!</h3>
+                <p class="">hover <dfn title="hello!">italic words</dfn> to demystify jargon! </p>
+                <div class="space-y-4">
+                    <section class="p-6 mt-12 glass-panel">
+                        <h2 class="mb-4 text-xl font-bold max:sm:text-base">EOH 2026 Demo</h2>
+                        <div class="grid gap-4 md:grid-cols-3">
+                            <div class="grid-card">
+                                <p class=" max-sm:text-sm">For our EOH 2026 project, we worked on a proof of
+                                    concept
+                                    for a low-cost EMG-controlled prosthetic. Though similar projects have been done in
+                                    the
+                                    past, we hoped to acquaint our members with basic prosthetic technology including:
+                                </p>
+                                <ul class="list-disc list-inside text-2sm max-sm:text-sm">
+                                    <li> 3D design and printing </li>
+                                    <li> laser cutting </li>
+                                    <li> <dfn title="electromygraphy (muscle sensors)">EMGsensors </dfn></li>
+                                    <li> servomotor control </li>
+                                    <li>microcontroller programming</li>
+                                </ul>
+                            </div>
+                            <p class="grid-card max-sm:text-sm">We also wanted to emphasize important
+                                limitations
+                                in
+                                existing purely mechanical prosthetic designs (limited applicability due to
+                                physical
+                                variation in residual limbs, space constraints in providing sufficent power to
+                                prosthetics, limited inputs from EMG sensors alone, etc). We hope to work more
+                                on the
+                                use of other input modailities (e.g. <dfn title="inertial measurement unit">
+                                    IMUs,
+                                </dfn><span>camera-assisted control for grasp detection</span><sup>
+                                    <a href="#1">[1]</a> </sup>, <dfn title="time of flight/infrared">
+                                    ToF/IR
+                                </dfn> distance
+                                sensors, etc) as well various feedback modalities (e.g. <dfn
+                                    title="vibration">haptic,</dfn>
+                                visual, weak electrostimulation, temperature, etc)
+                                in future projects.
+                            </p>
+
+                        </div>
+                        <div class="mt-4 text-sm " id="1">
+                            [1] <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5325038/" target="_blank"
+                                rel="noopener noreferrer" class="text-blue-600 hover:underline">DeGol, Akhtar, et
+                                al., 2016</a>
+                        </div>
+                    </section>
+                    <p>
+                        enableuiuc-group (at) office365.illinois.edu
+                    </p>
+                </div>
+            </div>
+            <br>
+            <div class="flex items-center justify-center max-sm:gap-x-1 contact-container">
+                <h2 class="text-3xl font-bold text-center max-sm:text-lg max-sm:px-2">social media</h2>
+                <p class="text-lg max-sm:text-sm ">otherwise, check us out on Instagram!</p>
+                <div class="flex-col items-center justify-center space-x-4 space-y-4">
+                    <button class="p-2 text-white transition bg-blue-600 rounded-full hover:bg-blue-700">
+                        <a href="https://www.instagram.com/enableuiuc/" target="_blank" rel="noopener noreferrer">
+                            @enableuiuc
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-4 text-center">
+        <div class="container mx-auto">
+            <p>&copy; e-NABLE @ UIUC 2026</p>
+        </div>
+    </footer>
+
+
+    <script>
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('shown');
+        });
+
+        const themeToggle = document.getElementById('theme-toggle');
+        const darkIcon = document.querySelector('.dark-icon');
+        const lightIcon = document.querySelector('.light-icon');
+
+        const savedTheme = localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        if (savedTheme === 'dark') document.documentElement.classList.add('dark-theme');
+
+        function updateIcons() {
+            const isDark = document.documentElement.classList.contains('dark-theme');
+            darkIcon.classList.toggle('hidden', !isDark);
+            lightIcon.classList.toggle('hidden', isDark);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark-theme');
+            const theme = document.documentElement.classList.contains('dark-theme') ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+            updateIcons();
+        });
+
+        updateIcons();
+    </script>
+</body>
+
+</html>
